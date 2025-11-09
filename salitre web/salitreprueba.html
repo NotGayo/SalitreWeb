@@ -1,0 +1,1873 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salitre Restaurante - Puerto de Cangas de Morrazo</title>
+    <meta name="description" content="Restaurante Salitre en el Puerto de Cangas. Especialidad en pescado fresco, mariscos y arroces con vistas al mar. Reservas: 634 24 28 06">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0a2e38;
+            --primary-light: #1a4b58;
+            --secondary: #2a9d8f;
+            --accent: #e9c46a;
+            --text: #264653;
+            --text-light: #5f7c8a;
+            --background: #f8f9fa;
+            --card-bg: rgba(255, 255, 255, 0.85);
+            --border: rgba(38, 70, 83, 0.1);
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            overflow-x: hidden;
+            background-color: var(--background);
+            background-image: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%);
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: var(--primary);
+            box-shadow: var(--shadow);
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .mobile-menu-toggle:hover {
+            color: var(--accent);
+        }
+
+        /* Hero Video Section */
+        .hero-video {
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .video-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+        }
+
+        .video-slider {
+            display: flex;
+            width: 300%;
+            height: 100%;
+            animation: slide 15s ease-in-out infinite;
+        }
+
+        .video-slide {
+            width: 33.333%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .video-slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 46, 56, 0.4);
+        }
+
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(10, 46, 56, 0.3) 0%, rgba(10, 46, 56, 0.7) 100%);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 2rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 8vw, 5rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
+            line-height: 1.1;
+        }
+
+        .hero-subtitle {
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+            opacity: 0.9;
+        }
+
+        .hero-features {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        .feature-tag {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(5px);
+            padding: 0.6rem 1.2rem;
+            border-radius: 30px;
+            font-size: 0.95rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: var(--transition);
+        }
+
+        .feature-tag:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-3px);
+        }
+
+        .cta-button {
+            background: var(--accent);
+            color: var(--primary);
+            padding: 1.1rem 2.5rem;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: var(--primary);
+            transition: var(--transition);
+            z-index: -1;
+        }
+
+        .cta-button:hover {
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .cta-button:hover::before {
+            width: 100%;
+        }
+
+        /* Section Styles */
+        section {
+            padding: 5rem 0;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .section-header::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--accent);
+            margin: 1.5rem auto 0;
+            border-radius: 2px;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* Menu Section */
+        .menu {
+            background: var(--background);
+            position: relative;
+        }
+
+        .menu-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+        }
+
+        .menu-tab {
+            background: white;
+            border: 1px solid var(--border);
+            padding: 0.8rem 1.8rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+            color: var(--text);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .menu-tab.active {
+            color: var(--primary);
+            border-color: var(--accent);
+            font-weight: 600;
+            background: var(--accent);
+        }
+
+        .menu-tab:hover {
+            border-color: var(--accent);
+        }
+
+        .menu-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .menu-category {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .menu-category.active {
+            display: block;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .menu-item {
+            background: var(--card-bg);
+            padding: 1.8rem;
+            border-radius: 12px;
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        .menu-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 0.8rem;
+        }
+
+        .menu-item-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--primary);
+            flex: 1;
+        }
+
+        .menu-item-price {
+            font-weight: 600;
+            color: var(--secondary);
+            font-size: 1.1rem;
+            margin-left: 1rem;
+        }
+
+        .menu-item-description {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .menu-item-notes {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            margin-top: 0.8rem;
+            font-style: italic;
+            padding-left: 1rem;
+            border-left: 2px solid var(--accent);
+        }
+
+        /* Calendar Section */
+        .calendar-section {
+            background: white;
+            position: relative;
+        }
+
+        .calendar-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border);
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .calendar-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--primary);
+        }
+
+        .calendar-nav {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .calendar-btn {
+            background: var(--accent);
+            color: var(--primary);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .calendar-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .calendar-day-header {
+            text-align: center;
+            font-weight: 600;
+            color: var(--primary);
+            padding: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .calendar-day {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+            position: relative;
+        }
+
+        .calendar-day.available {
+            background: white;
+            border: 1px solid var(--border);
+            color: var(--text);
+        }
+
+        .calendar-day.available:hover {
+            background: var(--accent);
+            color: var(--primary);
+            transform: scale(1.05);
+        }
+
+        .calendar-day.selected {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .calendar-day.unavailable {
+            background: #f5f5f5;
+            color: #ccc;
+            cursor: not-allowed;
+        }
+
+        .time-slots {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .time-slot {
+            background: white;
+            border: 2px solid var(--border);
+            padding: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .time-slot:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .time-slot.selected {
+            background: var(--secondary);
+            border-color: var(--secondary);
+            color: white;
+        }
+
+        .time-slot.full {
+            background: #f5f5f5;
+            color: #999;
+            cursor: not-allowed;
+            text-decoration: line-through;
+        }
+
+        .slot-availability {
+            font-size: 0.8rem;
+            margin-top: 0.3rem;
+            opacity: 0.9;
+        }
+
+        /* Events Section */
+        .events {
+            background: linear-gradient(135deg, var(--primary-light) 0%, var(--secondary) 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .events::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.05"><path fill="white" d="M20,20 Q40,5 60,20 T100,20 Q85,40 100,60 T100,100 Q60,85 20,100 T0,100 Q5,60 0,20 T20,20 Z"/></svg>');
+            background-size: 120px;
+        }
+
+        .events-content {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .event-image {
+            background: linear-gradient(45deg, var(--accent), #f4a261);
+            height: 400px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .event-image::before {
+            content: '🥘';
+            font-size: 4rem;
+            position: absolute;
+            z-index: 1;
+        }
+
+        .event-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.1"><path fill="white" d="M20,20 Q40,5 60,20 T100,20 Q85,40 100,60 T100,100 Q60,85 20,100 T0,100 Q5,60 0,20 T20,20 Z"/></svg>');
+            background-size: 120px;
+        }
+
+        .event-details h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .event-details p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 1rem;
+            opacity: 0.95;
+        }
+
+        .event-highlight {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-top: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .event-price {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        /* Reservation Form */
+        .reservation-form {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(233, 196, 106, 0.2);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .selected-info {
+            background: #e8f5e9;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border: 1px solid #c8e6c9;
+            color: #2e7d32;
+        }
+
+        /* Location Section */
+        .location {
+            background: var(--background);
+            position: relative;
+        }
+
+        .location-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .location-info {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            height: fit-content;
+            border: 1px solid var(--border);
+        }
+
+        .location-map {
+            background: linear-gradient(135deg, var(--primary-light) 0%, var(--secondary) 100%);
+            height: 450px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .location-map iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 12px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .contact-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .contact-icon {
+            font-size: 1.4rem;
+            margin-right: 1.2rem;
+            color: var(--secondary);
+            min-width: 30px;
+            text-align: center;
+        }
+
+        .contact-details h4 {
+            margin-bottom: 0.3rem;
+            color: var(--primary);
+            font-size: 1.1rem;
+        }
+
+        .contact-details p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .hours-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.8rem;
+            margin-top: 0.8rem;
+        }
+
+        .hours-grid div {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.4rem 0;
+            font-size: 0.9rem;
+            border-bottom: 1px dashed var(--border);
+        }
+
+        .hours-grid div:last-child {
+            border-bottom: none;
+        }
+
+        .hours-grid div span:first-child {
+            font-weight: 500;
+            color: var(--primary);
+        }
+
+        .hours-grid div span:last-child {
+            color: var(--text-light);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: rgba(255, 255, 255, 0.85);
+            padding: 3rem 0 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .social-links {
+            margin-top: 1.5rem;
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+
+        .social-links a {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slide {
+            0%, 25% { transform: translateX(0); }
+            33%, 58% { transform: translateX(-33.333%); }
+            66%, 91% { transform: translateX(-66.666%); }
+            100% { transform: translateX(0); }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--primary);
+                flex-direction: column;
+                padding: 1.5rem;
+                box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+                gap: 1.2rem;
+                transform: translateY(-100%);
+                opacity: 0;
+                transition: var(--transition);
+            }
+
+            .nav-links.active {
+                display: flex;
+                transform: translateY(0);
+                opacity: 1;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .hero-features {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: center;
+            }
+
+            .events-content,
+            .location-content {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 2.2rem;
+            }
+
+            .reservation-form,
+            .calendar-container {
+                padding: 1.8rem;
+            }
+
+            .menu-item {
+                padding: 1.5rem;
+            }
+
+            .calendar-grid {
+                gap: 0.3rem;
+            }
+
+            .calendar-day {
+                font-size: 0.8rem;
+            }
+        }
+
+        .success-message {
+            background: #e8f5e9;
+            color: #2e7d32;
+            padding: 1.2rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            display: none;
+            border: 1px solid #c8e6c9;
+            font-weight: 500;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        .warning-message {
+            background: #fff3e0;
+            color: #ef6c00;
+            padding: 1.2rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            display: none;
+            border: 1px solid #ffe0b2;
+            font-weight: 500;
+        }
+
+        .warning-message.show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">Salitre</div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#menu">Menú</a></li>
+                <li><a href="#reservas">Reservas</a></li>
+                <li><a href="#eventos">Eventos</a></li>
+                <li><a href="#ubicacion">Ubicación</a></li>
+            </ul>
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">☰</button>
+        </div>
+    </nav>
+
+    <!-- Hero Video Section -->
+    <section class="hero-video" id="inicio">
+        <div class="video-container">
+            <div class="video-slider">
+                <div class="video-slide" style="background-image: url('fotos salitre visuallstudio/IMG_0891.jpeg');">
+                    <div class="video-overlay"></div>
+                </div>
+                <div class="video-slide" style="background-image: url('https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=1600&q=80');">
+                    <div class="video-overlay"></div>
+                </div>
+                <div class="video-slide" style="background-image: url('https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=1600&q=80');">
+                    <div class="video-overlay"></div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-content">
+            <h1>Salitre</h1>
+            <p class="hero-subtitle">Restaurante en el Puerto de Cangas de Morrazo</p>
+            <div class="hero-features">
+                <span class="feature-tag">🌊 Vistas al mar</span>
+                <span class="feature-tag">🍽️ Terraza cubierta</span>
+                <span class="feature-tag">🐟 Productos frescos</span>
+            </div>
+            <a href="#reservas" class="cta-button">Reservar Mesa</a>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section class="menu" id="menu">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Nuestra Carta</h2>
+                <p class="section-subtitle">Descubre nuestra selección de platos preparados con productos frescos del día</p>
+            </div>
+            
+            <div class="menu-tabs">
+                <button class="menu-tab active" data-category="entradas">Entradas / Tapas</button>
+                <button class="menu-tab" data-category="bivalvos">Bivalvos</button>
+                <button class="menu-tab" data-category="crustaceos">Crustáceos</button>
+                <button class="menu-tab" data-category="arroces">Arroces</button>
+                <button class="menu-tab" data-category="platos">Platos Principales</button>
+                <button class="menu-tab" data-category="postres">Postres</button>
+                <button class="menu-tab" data-category="vinos">Vinos</button>
+            </div>
+
+            <div class="menu-content">
+                <!-- Entradas / Tapas -->
+                <div class="menu-category active" id="entradas">
+                    <div class="menu-grid">
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h3 class="menu-item-title">Tortilla de patata y cebolla caramelizada</h3>
+                                <span class="menu-item-price">8,00€</span>
+                            </div>
+                            <p class="menu-item-description">La hacemos al momento con huevos ecológicos, patata gallega amarilla y cebolla caramelizada.</p>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h3 class="menu-item-title">Tortilla de patata y choco de la ría</h3>
+                                <span class="menu-item-price">10,00€</span>
+                            </div>
+                            <p class="menu-item-description">Con choco de la ría y su tinta, huevos ecológicos y patata gallega amarilla. Se sirve con alioli de ajonegro.</p>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h3 class="menu-item-title">Torto con atún rojo, huevo frito y tamarindo</h3>
+                                <span class="menu-item-price">3,70€</span>
+                            </div>
+                            <p class="menu-item-description">Una unidad de torto de maíz frito con tacos de atún rojo marinado en tamarindo y espuma de huevo frito.</p>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h3 class="menu-item-title">Niguiri de Raya</h3>
+                                <span class="menu-item-price">8,50€</span>
+                            </div>
+                            <p class="menu-item-description">Una unidad de falso nigiri crujiente con raya guisada al estilo tradicional con un toque ligero de cacao.</p>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h3 class="menu-item-title">Cangrejo crujiente con mango y lima</h3>
+                                <span class="menu-item-price">10,50€</span>
+                            </div>
+                            <p class="menu-item-description">Una unidad de cangrejo de concha blanda en tempura ligera con puré de mango picante y mayonesa de lima.</p>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h3 class="menu-item-title">Buñuelos cremosos de pulpo</h3>
+                                <span class="menu-item-price">10,00€</span>
+                            </div>
+                            <p class="menu-item-description">Con crema de aguacate y lima, mayonesa ligeramente picante de ajada y cebolla frita crujiente. (8 unidades)</p>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h3 class="menu-item-title">Empanadillas de secreto ibérico de bellota</h3>
+                                <span class="menu-item-price">10,00€</span>
+                            </div>
+                            <p class="menu-item-description">Con mermelada de pimiento de padrón ligeramente picante y mayonesa ahumada. (4 unidades)</p>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h3 class="menu-item-title">Saquitos de vaca madurada</h3>
+                                <span class="menu-item-price">12,00€</span>
+                            </div>
+                            <p class="menu-item-description">Crujientes, rellenos de vaca madurada, salsa melosa de vaca, salsa tártara y chimichurri casero. (6 unidades)</p>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h3 class="menu-item-title">Ensalada de endivias a la brasa</h3>
+                                <span class="menu-item-price">12,00€</span>
+                            </div>
+                            <p class="menu-item-description">Con jamón de Jabugo D.O.P, higos y mermelada de tomate.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bivalvos -->
+                <div class="menu-category" id="bivalvos">
+                    <div class="menu-grid">
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h3 class="menu-item-title">Navajas</h3>
+                                <span class="menu-item-price">16,00€</span>
+                            </div>
+                            <p class="menu-item-description">A la brasa con emulsión de aceite de ajo, limón y perejil.</p>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h3 class="menu-item-title">Volandeiras gallegas</h3>
+                                <span class="menu-item-price">14,00€</span>
+                            </div>
+                            <p class="menu-item-description">Ligeramente abiertas a la brasa con aceite de ajo.</p>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h3 class="menu-item-title">Berberechos XXL</h3>
+                                <span class="menu-item-price">18,00€</span>
+                            </div>
+                            <p class="menu-item-description">Abiertos ligeramente a la brasa y terminados con aceite de ajo.</p>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h3 class="menu-item-title">Vieiras del pacífico</h3>
+                                <span class="menu-item-price">22,00€</span>
+                            </div>
+                            <p class="menu-item-description">Marcadas a la plancha y terminadas con una picada de tomate, cebolla, cilantro, lima y toques mexicanos.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Crustáceos -->
+                <div class="menu-category" id="crustaceos">
+                    <div class="menu-grid">
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h3 class="menu-item-title">Gamba blanca S/M</h3>
+                                <span class="menu-item-price">S/P</span>
+                            </div>
+                            <p class="menu-item-description">A la brasa, preguntar disponibilidad. Precio según mercado.</p>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h3 class="menu-item-title">Langostino de Sanlúcar</h3>
+                                <span class="menu-item-price">S/P</span>
+                            </div>
+                            <p class="menu-item-description">A la brasa, preguntar disponibilidad. Precio según mercado.</p>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h3 class="menu-item-title">Gamba roja o gamba alistada S/M</h3>
+                                <span class="menu-item-price">S/P</span>
+                            </div>
+                            <p class="menu-item-description">A la brasa, preguntar disponibilidad. Precio según mercado.</p>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h3 class="menu-item-title">Carabinero</h3>
+                                <span class="menu-item-price">S/P</span>
+                            </div>
+                            <p class="menu-item-description">A la brasa, preguntar disponibilidad. Precio según mercado.</p>
+                        </div>
+                    </div>
+                    <p style="text-align: center; margin-top: 2rem; color: var(--text-light);">Precios según talla y disponibilidad del mercado. Consultar servicio.</p>
+                </div>
+
+                <!-- Arroces -->
+                <div class="menu-category" id="arroces">
+                    <div class="menu-grid">
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h3 class="menu-item-title">Choco de la ría con alcachofas y ajo negro</h3>
+                                <span class="menu-item-price">20,00€/Ración</span>
+                            </div>
+                            <p class="menu-item-description">Arroz de choco de la ría con alioli de ajo negro y flor de alcachofa crujiente.</p>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h3 class="menu-item-title">Pescados y mariscos del día</h3>
+                                <span class="menu-item-price">24,00€/Ración</span>
+                            </div>
+                            <p class="menu-item-description">Arroz de pescados y mariscos de la rula de Cangas o Vigo.</p>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h3 class="menu-item-title">Carabineros a la brasa</h3>
+                                <span class="menu-item-price">26,00€/Ración</span>
+                            </div>
+                            <p class="menu-item-description">Preparamos una "esencia" con sus cabezas y lo agregamos al caldo de cocción, presentamos con 1 carabinero grande y uno pequeño.</p>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h3 class="menu-item-title">Secreto de bellota, rebozuelos y foie</h3>
+                                <span class="menu-item-price">28,00€/Ración</span>
+                            </div>
+                            <p class="menu-item-description">Arroz de secreto ibérico de bellota con rebozuelos salteados a la llama y foie grass marcado a la plancha, una mezcla espectacular.</p>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h3 class="menu-item-title">Secreto ibérico de bellota (Min. 2 raciones)</h3>
+                                <span class="menu-item-price">22,00€/Ración</span>
+                            </div>
+                            <p class="menu-item-description">Arroz de secreto ibérico de bellota a la brasa con puntos de mermelada de manzana verde.</p>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h3 class="menu-item-title">Rubia Gallega Madurada (Min. 2 raciones)</h3>
+                                <span class="menu-item-price">26,00€/Ración</span>
+                            </div>
+                            <p class="menu-item-description">Arroz de Chuleta de la raza Rubia Gallega, madurada un mínimo de 30 días. Hacemos un caldo con los restos de los huesos de los chuletones para la cocción del arroz y terminamos con la chuleta cocinada a la brasa presentada encima del arroz y unos pimientos del piquillo caramelizados para un toque dulce.</p>
+                        </div>
+                    </div>
+                    <p style="text-align: center; margin-top: 2rem; color: var(--text-light);">*Los arroces se elaboran con caldo casero y productos de proximidad. Tiempo de preparación: 25-30 minutos.</p>
+                </div>
+
+                <!-- Platos Principales -->
+                <div class="menu-category" id="platos">
+                    <div class="menu-grid">
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h3 class="menu-item-title">Pulpo a la brasa</h3>
+                                <span class="menu-item-price">20,00€</span>
+                            </div>
+                            <p class="menu-item-description">Con parmentier de patata y mojo verde.</p>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h3 class="menu-item-title">Escarapote o cabra</h3>
+                                <span class="menu-item-price">20,00€</span>
+                            </div>
+                            <p class="menu-item-description">Es un pescado de roca, lo preparamos frito entero rebozado con harina de arroz y acompañado con mayonesa de ajo asado y kimchie.</p>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h3 class="menu-item-title">Pescados del día de proximidad</h3>
+                                <span class="menu-item-price">S/P</span>
+                            </div>
+                            <p class="menu-item-description">¿Cómo preparamos nuestros pescados? Simple, a la brasa. Utilizamos sus jugos para hacer un pilpil y lo emulsionamos con aceite de ajo. Acompañamos con patatas baby y bañamos todo con este maravilloso pilpil para potenciar sus sabores.</p>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h3 class="menu-item-title">La Asturiana</h3>
+                                <span class="menu-item-price">17,50€</span>
+                            </div>
+                            <p class="menu-item-description">Hamburguesa de 250g de vaca madurada a la brasa en pan brioche con crema de queso afuegal pitu (D.O.P), mermelada de manzana verde, mayonesa de tuetano y montaña de cebolla frita. Viene con patatas fritas.</p>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h3 class="menu-item-title">Secreto ibérico de bellota</h3>
+                                <span class="menu-item-price">24,00€</span>
+                            </div>
+                            <p class="menu-item-description">A la brasa acompañado con patatas baby asadas y una crema de castañas.</p>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h3 class="menu-item-title">Chuleta de vaca rubia Gallega</h3>
+                                <span class="menu-item-price">42,00€</span>
+                            </div>
+                            <p class="menu-item-description">Madurada mínimo 30 días a la brasa acompañada de patatas asadas y pimientos del piquillo caramelizados. (650g-700g)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Postres -->
+                <div class="menu-category" id="postres">
+                    <div class="menu-grid">
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h3 class="menu-item-title">Tarta de queso azul</h3>
+                                <span class="menu-item-price">7,00€</span>
+                            </div>
+                            <p class="menu-item-description">Tarta de queso azul al horno con helado de frutos rojos.</p>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h3 class="menu-item-title">Tarta de chocolate</h3>
+                                <span class="menu-item-price">7,00€</span>
+                            </div>
+                            <p class="menu-item-description">Tarta de chocolate fundente con helado de mango picante.</p>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h3 class="menu-item-title">Mousse de limón</h3>
+                                <span class="menu-item-price">7,00€</span>
+                            </div>
+                            <p class="menu-item-description">Mousse de limón y chocolate blanco con frutos secos garrapiñados.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Vinos -->
+                <div class="menu-category" id="vinos">
+                    <div class="menu-grid">
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h3 class="menu-item-title">Godai</h3>
+                                <span class="menu-item-price">3€/Copa | 18€/Botella</span>
+                            </div>
+                            <p class="menu-item-description">Vino blanco fresco y aromático, con notas de manzana verde, cítricos y flores blancas. En boca es equilibrado, con acidez viva y final mineral.</p>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h3 class="menu-item-title">Ladairo (Blanco)</h3>
+                                <span class="menu-item-price">2,50€/Copa | 15€/Botella</span>
+                            </div>
+                            <p class="menu-item-description">Blanco de Monterrei elaborado con uva Godello. Aromas a manzana, pera y flores blancas, con sutil toque mineral. En boca es fresco, untuoso y con final largo y equilibrado.</p>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h3 class="menu-item-title">Pájaro Loco</h3>
+                                <span class="menu-item-price">2,50€/Copa | 16€/Botella</span>
+                            </div>
+                            <p class="menu-item-description">Vino blanco de Monterrei elaborado con Godello. Aromas intensos a fruta blanca, flores y un toque mineral. En boca es fresco, equilibrado y con una textura suave y elegante.</p>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h3 class="menu-item-title">Terras Gauda</h3>
+                                <span class="menu-item-price">25€ Botella</span>
+                            </div>
+                            <p class="menu-item-description">Blanco elegante y estructurado de Rías Baixas, con notas de fruta blanca, melocotón y hierbas frescas. En boca es amplio, equilibrado y de final persistente.</p>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h3 class="menu-item-title">Pepito Grillo</h3>
+                                <span class="menu-item-price">2,50€/Copa | 16€/Botella</span>
+                            </div>
+                            <p class="menu-item-description">Vino blanco gallego fresco y aromático, con notas de pera, manzana y flores blancas. En boca es redondo, con buena acidez y un final frutal y equilibrado.</p>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h3 class="menu-item-title">Soñal</h3>
+                                <span class="menu-item-price">2,50€/Copa | 16€/Botella</span>
+                            </div>
+                            <p class="menu-item-description">Vino blanco de Ribeiro elaborado con Treixadura y Godello. Aromas a fruta blanca madura, flores y toques cítricos. En boca es fresco, equilibrado y con final suave y elegante.</p>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h3 class="menu-item-title">El Maquinista</h3>
+                                <span class="menu-item-price">2,50€/Copa | 15€/Botella</span>
+                            </div>
+                            <p class="menu-item-description">Tinto de Rioja elaborado con Tempranillo. Aromas a frutos rojos y negros maduros, ligeras notas especiadas y tostadas. En boca es equilibrado, con taninos suaves y final persistente.</p>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h3 class="menu-item-title">Carramimbre</h3>
+                                <span class="menu-item-price">3€/Copa | 18€/Botella</span>
+                            </div>
+                            <p class="menu-item-description">Tinto elegante de Ribera del Duero elaborado con Tempranillo. Aromas a frutos negros maduros, vainilla y toques especiados. En boca es intenso, estructurado y con un final largo y sedoso.</p>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h3 class="menu-item-title">Ladairo (Tinto)</h3>
+                                <span class="menu-item-price">2,50€/Copa | 16€/Botella</span>
+                            </div>
+                            <p class="menu-item-description">Tinto de Valdeorras elaborado con uva Mencía. Aromas a frutos rojos frescos, ligeras notas florales y toques minerales. En boca es elegante, con taninos suaves y final persistente.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reservation Calendar Section -->
+    <section class="calendar-section" id="reservas">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Reservas con Calendario</h2>
+                <p class="section-subtitle">Selecciona día y hora disponible. Reserva tu mesa con vistas al mar.</p>
+            </div>
+            
+            <div class="calendar-container">
+                <div class="success-message" id="successMessage">
+                    ✅ Reserva registrada. Te llamaremos al 634 24 28 06 para confirmar.
+                </div>
+                <div class="warning-message" id="warningMessage">
+                    ⚠️ Por favor, completa todos los campos y selecciona día y hora.
+                </div>
+
+                <div class="calendar-header">
+                    <h3 class="calendar-title" id="calendarMonth"></h3>
+                    <div class="calendar-nav">
+                        <button class="calendar-btn" id="prevMonth">‹ Anterior</button>
+                        <button class="calendar-btn" id="nextMonth">Siguiente ›</button>
+                    </div>
+                </div>
+
+                <div class="calendar-grid" id="calendarGrid"></div>
+
+                <div id="timeSlotsContainer" style="display: none;">
+                    <h4 style="margin-bottom: 1rem; color: var(--primary);">Horarios disponibles:</h4>
+                    <div class="time-slots" id="timeSlots"></div>
+                </div>
+
+                <div class="reservation-form" id="reservationFormContainer" style="display: none;">
+                    <div class="selected-info" id="selectedInfo"></div>
+                    <form id="reservationForm" action="https://formsubmit.co/634242806@example.com" method="POST">
+                        <input type="hidden" name="_subject" value="Nueva reserva - Salitre Restaurant">
+                        <input type="hidden" id="selectedDateTime" name="Fecha y hora">
+                        <input type="hidden" name="_next" value="https://tuusuario.github.io/salitre-web/#reservas">
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name">Nombre completo *</label>
+                                <input type="text" id="name" name="Nombre" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Teléfono *</label>
+                                <input type="tel" id="phone" name="Teléfono" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="guests">Número de personas *</label>
+                                <select id="guests" name="Personas" required>
+                                    <option value="">Seleccionar</option>
+                                    <option value="1">1 persona</option>
+                                    <option value="2">2 personas</option>
+                                    <option value="3">3 personas</option>
+                                    <option value="4">4 personas</option>
+                                    <option value="5">5 personas</option>
+                                    <option value="6">6 personas</option>
+                                    <option value="7+">Más de 6 personas</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email (opcional)</label>
+                                <input type="email" id="email" name="Email" placeholder="opcional@email.com">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="notes">Notas especiales (opcional)</label>
+                            <textarea id="notes" name="Notas" rows="3" placeholder="Alergias, preferencias..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="cta-button" style="width: 100%;">Confirmar Reserva</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Events Section -->
+    <section class="events" id="eventos">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" style="color: white;">Eventos Especiales</h2>
+                <p class="section-subtitle" style="color: rgba(255,255,255,0.9);">Experiencias únicas cada fin de semana</p>
+            </div>
+            
+            <div class="events-content">
+                <div class="event-image">
+                    <!-- Aquí iría la foto del jamón - reemplaza con tu imagen real -->
+                    <div style="position: absolute; z-index: 1; text-align: center;">
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">🥩</div>
+                        <p style="font-size: 1.2rem; font-weight: 600;">Corte de Jamón Ibérico</p>
+                    </div>
+                </div>
+                <div class="event-details">
+                    <h3>Corte de Jamón de Bellota 100%</h3>
+                    <p><strong>¿Cuándo?</strong> Todos los sábados y domingos de 11:00 a 13:00h</p>
+                    <p><strong>¿Qué incluye?</strong> Plato de jamón ibérico de bellota 100% con picos de pan artesano y una consumición a elegir.</p>
+                    <p><strong>Reserva previa recomendada</strong> por la alta demanda de esta experiencia tradicional.</p>
+                    
+                    <div class="event-highlight">
+                        <div class="event-price">10,00€</div>
+                        <p style="margin: 0;">Plato completo + consumición</p>
+                    </div>
+                    
+                    <a href="#reservas" class="cta-button" style="margin-top: 1.5rem;">Reservar Evento</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location Section -->
+    <section class="location" id="ubicacion">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Ubicación</h2>
+                <p class="section-subtitle">Encuéntranos en el Puerto de Cangas de Morrazo</p>
+            </div>
+            
+            <div class="location-content">
+                <div class="location-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">📍</div>
+                        <div class="contact-details">
+                            <h4>Dirección</h4>
+                            <p>Puerto deportivo sin número<br>36940 Cangas, Pontevedra</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">📞</div>
+                        <div class="contact-details">
+                            <h4>Teléfono</h4>
+                            <p><a href="tel:+34634242806" style="color: var(--primary); text-decoration: none;">634 24 28 06</a></p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">🕒</div>
+                        <div class="contact-details">
+                            <h4>Horario</h4>
+                            <div class="hours-grid">
+                                <div><span>Miércoles - Viernes</span><span>13:00-16:00<br>20:00-22:30</span></div>
+                                <div><span>Sábado</span><span>11:00-13:00<br>13:00-16:00<br>20:00-22:30</span></div>
+                                <div><span>Domingo</span><span>11:00-13:00<br>13:00-16:00</span></div>
+                                <div><span>Lunes - Martes</span><span>Cerrado</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">🅿️</div>
+                        <div class="contact-details">
+                            <h4>Estacionamiento</h4>
+                            <p>Aparcamiento gratuito disponible en el puerto, a 1 minuto caminando.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="location-map">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3024.142293!2d-8.7834323!3d42.2601854!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd2f6136ac9e90c1%3A0xf1c2a82a7c7288a6!2sPuerto%20deportivo%20sin%20n%C3%BAmero%2C%2036940%20Cangas%2C%20Pontevedra!5e0!3m2!1ses!2ses!4v1234567890" 
+                        width="100%" 
+                        height="100%" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2024 Salitre Restaurante. Todos los derechos reservados.</p>
+                <p>Puerto de Cangas de Morrazo - 634 24 28 06</p>
+                <div class="social-links">
+                    <a href="https://wa.me/34634242806" aria-label="WhatsApp">💬</a>
+                    <a href="tel:+34634242806" aria-label="Teléfono">📞</a>
+                    <a href="https://www.instagram.com/salitrecangas" aria-label="Instagram">📷</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const navLinks = document.getElementById('navLinks');
+        
+        mobileMenuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            mobileMenuToggle.textContent = navLinks.classList.contains('active') ? '✕' : '☰';
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Menu tabs
+        const menuTabs = document.querySelectorAll('.menu-tab');
+        const menuCategories = document.querySelectorAll('.menu-category');
+
+        menuTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                menuTabs.forEach(t => t.classList.remove('active'));
+                menuCategories.forEach(c => c.classList.remove('active'));
+                tab.classList.add('active');
+                const categoryId = tab.getAttribute('data-category');
+                document.getElementById(categoryId).classList.add('active');
+            });
+        });
+
+        // Calendar functionality
+        class ReservationCalendar {
+            constructor() {
+                this.currentDate = new Date();
+                this.selectedDate = null;
+                this.selectedTime = null;
+                this.reservations = JSON.parse(localStorage.getItem('salitre-reservations') || '[]');
+                
+                this.init();
+            }
+
+            init() {
+                this.renderCalendar();
+                this.setupEventListeners();
+                this.updateMonthTitle();
+            }
+
+            setupEventListeners() {
+                document.getElementById('prevMonth').addEventListener('click', () => this.previousMonth());
+                document.getElementById('nextMonth').addEventListener('click', () => this.nextMonth());
+            }
+
+            renderCalendar() {
+                const grid = document.getElementById('calendarGrid');
+                grid.innerHTML = '';
+                
+                // Day headers
+                const dayHeaders = ['Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa', 'Do'];
+                dayHeaders.forEach(day => {
+                    const header = document.createElement('div');
+                    header.className = 'calendar-day-header';
+                    header.textContent = day;
+                    grid.appendChild(header);
+                });
+
+                // Days
+                const firstDay = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), 1);
+                const lastDay = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth() + 1, 0);
+                const startDate = new Date(firstDay);
+                startDate.setDate(startDate.getDate() - firstDay.getDay() + 1);
+
+                for (let i = 0; i < 42; i++) {
+                    const date = new Date(startDate);
+                    date.setDate(startDate.getDate() + i);
+                    const dayElement = this.createDayElement(date);
+                    grid.appendChild(dayElement);
+                }
+            }
+
+            createDayElement(date) {
+                const day = document.createElement('div');
+                day.className = 'calendar-day';
+                day.textContent = date.getDate();
+                
+                const today = new Date();
+                const isCurrentMonth = date.getMonth() === this.currentDate.getMonth();
+                const dayOfWeek = date.getDay();
+                const isWednesdayToSunday = dayOfWeek >= 3 || dayOfWeek === 0; // Miércoles (3) a Domingo (0)
+                const isPast = date < today.setHours(0,0,0,0);
+                
+                if (!isCurrentMonth || isPast || !isWednesdayToSunday) {
+                    day.classList.add('unavailable');
+                } else {
+                    day.classList.add('available');
+                    day.addEventListener('click', () => this.selectDate(date));
+                }
+
+                return day;
+            }
+
+            selectDate(date) {
+                this.selectedDate = date;
+                this.selectedTime = null;
+                
+                document.querySelectorAll('.calendar-day.selected').forEach(d => d.classList.remove('selected'));
+                event.target.classList.add('selected');
+                
+                this.renderTimeSlots();
+                document.getElementById('timeSlotsContainer').style.display = 'block';
+                document.getElementById('reservationFormContainer').style.display = 'none';
+            }
+
+            renderTimeSlots() {
+                const container = document.getElementById('timeSlots');
+                container.innerHTML = '';
+                
+                const timeSlots = this.generateTimeSlots();
+                timeSlots.forEach(slot => {
+                    const slotElement = document.createElement('div');
+                    slotElement.className = 'time-slot';
+                    slotElement.innerHTML = `
+                        <div>${slot.time}</div>
+                        <div class="slot-availability">${slot.available} plazas</div>
+                    `;
+                    
+                    if (slot.available <= 0) {
+                        slotElement.classList.add('full');
+                    } else {
+                        slotElement.addEventListener('click', () => this.selectTime(slot.time));
+                    }
+                    
+                    container.appendChild(slotElement);
+                });
+            }
+
+            generateTimeSlots() {
+                const slots = [];
+                const dateStr = this.selectedDate.toISOString().split('T')[0];
+                
+                // Horario de comida: 13:00-16:00
+                for (let hour = 13; hour < 16; hour++) {
+                    for (let min = 0; min < 60; min += 30) {
+                        const time = `${hour.toString().padStart(2, '0')}:${min.toString().padStart(2, '0')}`;
+                        const reserved = this.reservations.filter(r => r.date === dateStr && r.time === time).length;
+                        slots.push({
+                            time,
+                            available: Math.max(0, 4 - reserved)
+                        });
+                    }
+                }
+                
+                // Horario de cena: 20:00-22:30
+                for (let hour = 20; hour < 22; hour++) {
+                    for (let min = 0; min < 60; min += 30) {
+                        const time = `${hour.toString().padStart(2, '0')}:${min.toString().padStart(2, '0')}`;
+                        const reserved = this.reservations.filter(r => r.date === dateStr && r.time === time).length;
+                        slots.push({
+                            time,
+                            available: Math.max(0, 4 - reserved)
+                        });
+                    }
+                }
+                
+                // Última franja de cena: 22:00-22:30
+                const time = '22:00';
+                const reserved = this.reservations.filter(r => r.date === dateStr && r.time === time).length;
+                slots.push({
+                    time,
+                    available: Math.max(0, 4 - reserved)
+                });
+                
+                return slots;
+            }
+
+            selectTime(time) {
+                this.selectedTime = time;
+                
+                document.querySelectorAll('.time-slot.selected').forEach(s => s.classList.remove('selected'));
+                event.target.classList.add('selected');
+                
+                const dateStr = this.selectedDate.toLocaleDateString('es-ES', {
+                    weekday: 'long',
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                });
+                
+                document.getElementById('selectedInfo').innerHTML = `
+                    <strong>Fecha seleccionada:</strong> ${dateStr}<br>
+                    <strong>Hora seleccionada:</strong> ${time}
+                `;
+                
+                document.getElementById('selectedDateTime').value = `${dateStr} - ${time}`;
+                document.getElementById('reservationFormContainer').style.display = 'block';
+            }
+
+            previousMonth() {
+                this.currentDate.setMonth(this.currentDate.getMonth() - 1);
+                this.updateMonthTitle();
+                this.renderCalendar();
+                this.resetSelection();
+            }
+
+            nextMonth() {
+                this.currentDate.setMonth(this.currentDate.getMonth() + 1);
+                this.updateMonthTitle();
+                this.renderCalendar();
+                this.resetSelection();
+            }
+
+            updateMonthTitle() {
+                const monthNames = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+                    'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+                document.getElementById('calendarMonth').textContent = 
+                    `${monthNames[this.currentDate.getMonth()]} ${this.currentDate.getFullYear()}`;
+            }
+
+            resetSelection() {
+                this.selectedDate = null;
+                this.selectedTime = null;
+                document.getElementById('timeSlotsContainer').style.display = 'none';
+                document.getElementById('reservationFormContainer').style.display = 'none';
+            }
+
+            addReservation(date, time) {
+                this.reservations.push({ date, time });
+                localStorage.setItem('salitre-reservations', JSON.stringify(this.reservations));
+            }
+        }
+
+        // Initialize calendar
+        const calendar = new ReservationCalendar();
+
+        // Form submission
+        const form = document.getElementById('reservationForm');
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const guests = document.getElementById('guests').value;
+            
+            if (!name || !phone || !guests || !calendar.selectedDate || !calendar.selectedTime) {
+                document.getElementById('warningMessage').classList.add('show');
+                setTimeout(() => {
+                    document.getElementById('warningMessage').classList.remove('show');
+                }, 3000);
+                return;
+            }
+            
+            // Add to local storage
+            const dateStr = calendar.selectedDate.toISOString().split('T')[0];
+            calendar.addReservation(dateStr, calendar.selectedTime);
+            
+            // Show success message
+            document.getElementById('successMessage').classList.add('show');
+            form.reset();
+            calendar.resetSelection();
+            
+            setTimeout(() => {
+                document.getElementById('successMessage').classList.remove('show');
+            }, 5000);
+            
+            // In a real implementation, you would send the email here
+            // For now, the form will submit to formsubmit.co (you need to replace the email)
+            // or you can use FormSubmit with your actual email and configure it
+            console.log('Reserva:', {
+                fecha: calendar.selectedDate,
+                hora: calendar.selectedTime,
+                nombre: name,
+                telefono: phone,
+                personas: guests
+            });
+        });
+
+        // FormSubmit.co configuration (replace with your actual email)
+        // 1. Go to https://formsubmit.co/
+        // 2. Enter your email: 634242806@yourdomain.com
+        // 3. Copy the URL they give you and replace in the form action
+
+        // Scroll effects
+        let lastScroll = 0;
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 100) {
+                nav.style.background = 'rgba(10, 46, 56, 0.95)';
+                nav.style.backdropFilter = 'blur(10px)';
+            } else {
+                nav.style.background = 'var(--primary)';
+                nav.style.backdropFilter = 'none';
+            }
+            
+            lastScroll = currentScroll;
+        });
+
+        // Intersection observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.menu-item').forEach(item => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(20px)';
+            item.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            observer.observe(item);
+        });
+    </script>
+</body>
+</html>
